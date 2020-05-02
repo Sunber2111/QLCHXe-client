@@ -1,0 +1,44 @@
+.card-emp {
+    width: 355px;
+    height: 210px;
+    border-radius: 10px !important;
+    display: inline-block;
+    margin-left: 11px !important;
+    margin-right: 11px !important;
+
+    img {
+        height: 120px !important;
+        width: 120px !important;
+        object-fit: cover;
+    }
+    &-header {
+        display: flex;
+        .info {
+            padding-left: 10px;
+            .info-content {
+                display: flex;
+                margin-bottom: 5px;
+                .info-header {
+                    color: rgb(141, 141, 141);
+                    margin-bottom: 3px;
+                    font-size: 16px;
+                }
+
+                .info-detail {
+                    font-size: 16px;
+                    margin-left: 10px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+    &-btn-grp {
+        margin-top: 20px;
+        .btn-left{
+            margin-left: 10% !important;
+        }
+        .btn-right{
+            margin-left: 40% !important;
+        }
+    }
+}
