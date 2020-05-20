@@ -1,8 +1,7 @@
 import * as customer from "../constants/customer";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
-import { v4 } from "uuid";
-import { closeModal } from "./modal";
+import { closeDialog } from "./dialog";
 
 export const getAll = () => async (dispatch) => {
   const data = await agent.Customer.getAll();
@@ -15,7 +14,7 @@ export const getAll = () => async (dispatch) => {
 export const submit = (data) => async (dispatch) => {
   try {
     if (!data.maKh) {
-      const cus = await agent.Customer.addCus({ ...data, maKh: v4() });
+      const cus = await agent.Customer.addCus({ ...data });
       dispatch({
         type: customer.ADD_CUSTOMER,
         payload: cus,
@@ -30,7 +29,7 @@ export const submit = (data) => async (dispatch) => {
       });
       success("Sửa Thành Công");
     }
-    dispatch(closeModal());
+    dispatch(closeDialog());
   } catch (error) {
     err("Thất Bại");
     console.log(error);

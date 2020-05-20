@@ -28,13 +28,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
       };
     }
-    case store.DELETE_STORE: {
-      const index = state.stores.findIndex((x) => x.maKh === payload.maKho);
-      state.stores.splice(index, 1);
-      return {
-        ...state,
-      };
-    }
     case store.SET_SELECT_STORE: {
       const store = state.stores.find((x) => x.maKho === payload);
       return {
@@ -82,6 +75,6 @@ export default (state = initialState, { type, payload }) => {
       }
     }
     default:
-      return { ...state };
+      return state
   }
 };

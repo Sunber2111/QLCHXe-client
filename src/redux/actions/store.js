@@ -15,7 +15,7 @@ export const getAll = () => async (dispatch) => {
 export const submit = (data) => async (dispatch) => {
   try {
     if (!data.maKho) {
-      const newstore = await agent.Store.addStore({ ...data, maKho: v4() });
+      const newstore = await agent.Store.addStore({ ...data });
       dispatch({
         type: store.ADD_STORE,
         payload: newstore,
@@ -61,7 +61,6 @@ export const submitDetailStore = (ctkho) => async (dispatch) => {
   try {
     ctkho.soluong = parseInt(ctkho.soluong);
     if (!ctkho.id) {
-      ctkho.id = v4();
 
       const data = await agent.Store.addDetailStore(ctkho);
 

@@ -3,10 +3,13 @@ import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
   UPDATE_CATEGORY,
+  SET_SELECT_CATE,
+  DELETE_SELECT_CATE,
 } from "../constants/category";
 
 const initialState = {
   categories: [],
+  isSelect: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -39,7 +42,20 @@ export default (state = initialState, { type, payload }) => {
         ...state,
       };
     }
+    case SET_SELECT_CATE: {
+      const index = state.categories.findIndex((x) => x.maLoaiXe === payload);
+      state.isSelect = state.categories[index];
+      return {
+        ...state,
+      };
+    }
+    case DELETE_SELECT_CATE: {
+      state.isSelect = null;
+      return {
+        ...state,
+      };
+    }
     default:
-      return { ...state };
+      return state;
   }
 };

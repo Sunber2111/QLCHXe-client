@@ -18,8 +18,6 @@ export const submit = (data) => async (dispatch) => {
     const { maKh} = data;
 
     const ngayXuat = day.toISOString();
-    const maHdx = v4();
-    const maNv = "1AD13DC0-4F0D-4F5E-B16F-1D4B29E4D116";
     let ctHdx = [];
 
     data.CtHdx.forEach((ct) => {
@@ -38,7 +36,6 @@ export const submit = (data) => async (dispatch) => {
       maHdx,
       maKh,
       ngayXuat,
-      maNv,
       ctHdx
     });
 

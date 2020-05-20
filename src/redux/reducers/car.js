@@ -1,4 +1,4 @@
-import { GET_ALL_CAR, DELETE_CAR, UPDATE_CAR, ADD_CAR } from "../constants/car";
+import { GET_ALL_CAR, DELETE_CAR, ADD_CAR } from "../constants/car";
 
 const initialState = {
   cars: [],
@@ -15,14 +15,6 @@ export default (state = initialState, { type, payload }) => {
       state.cars.push(payload);
       return { ...state };
     }
-    case UPDATE_CAR: {
-      const index = state.cars.findIndex((x) => x.maXe === payload.maXe);
-      state.cars.splice(index, 1);
-      state.cars.push(payload);
-      return {
-        ...state,
-      };
-    }
     case DELETE_CAR: {
       const index = state.cars.findIndex((x) => x.maXe === payload);
       state.cars.splice(index, 1);
@@ -31,6 +23,6 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     default:
-      return { ...state };
+      return state ;
   }
 };

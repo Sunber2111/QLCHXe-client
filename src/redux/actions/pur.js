@@ -15,19 +15,15 @@ export const getAll = () => async (dispatch) => {
 export const submit = (data) => async (dispatch) => {
   try {
     const day = new Date();
-    const { maKh} = data;
+    const { maNcc } = data;
 
-    const ngayXuat = day.toISOString();
-    const maHdx = v4();
-    const maNv = "1AD13DC0-4F0D-4F5E-B16F-1D4B29E4D116";
-    let ctHdx = [];
+    const ngayNhap = day.toISOString();
+    let ctHdn = [];
 
-    data.CtHdx.forEach((ct) => {
-      ctHdx.push({
+    data.CtHdn.forEach((ct) => {
+      ctHdn.push({
         id: ct.id,
         maXe: ct.maXe,
-        soKhung: ct.soKhung,
-        soMay: ct.soMay,
         soLuong: ct.soLuong,
         thueVat: ct.thueVat,
         maKho: ct.maKho,
@@ -35,11 +31,10 @@ export const submit = (data) => async (dispatch) => {
     });
 
     await agent.Phieu.addPhieuNhap({
-      maHdx,
-      maKh,
-      ngayXuat,
-      maNv,
-      ctHdx
+      maHdn,
+      maNcc,
+      ngayNhap,
+      ctHdn
     });
 
     dispatch(getAll());

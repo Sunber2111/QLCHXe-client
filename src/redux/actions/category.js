@@ -3,11 +3,15 @@ import {
   ADD_CATEGORY,
   UPDATE_CATEGORY,
   DELETE_CATEGORY,
+  SET_SELECT_CATE,
+  DELETE_SELECT_CATE,
 } from "../constants/category";
-import { CLOSE_MODAL } from "../constants/modal";
-import { v4 as uuidv4 } from "uuid";
+import {
+  GET_ALL_CAR
+} from "../constants/car";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
+import { closeDialog } from "./dialog";
 
 export const getAll = () => async (dispatch) => {
   try {
@@ -26,7 +30,6 @@ export const submit = (loaixe) => async (dispatch) => {
   try {
     if (!loaixe.maLoaiXe) {
       const data = await agent.Product.addCategory({
-        maLoaiXe: uuidv4(),
         tenLoaiXe: loaixe.tenLoaiXe,
       });
 
@@ -46,19 +49,15 @@ export const submit = (loaixe) => async (dispatch) => {
 
       success("Sửa Thành Công");
     }
+    dispatch(closeDialog());
   } catch (error) {
-    console.log(error);
-    
-    err("thất bại");
+    err(error);
   }
-  dispatch({ type: CLOSE_MODAL });
 };
 
 export const deleteCategory = (id) => async (dispatch) => {
   try {
-    const data = await agent.Product.deleteCategory(id);
-    console.log(data);
-
+    await agent.Product.deleteCategory(id);
     dispatch({
       type: DELETE_CATEGORY,
       payload: id,
@@ -68,4 +67,36 @@ export const deleteCategory = (id) => async (dispatch) => {
   } catch (error) {
     err("Xóa thất bại");
   }
+};
+
+export const setSelect = (id) => async (dispatch) => {
+  try {
+    const data = await agent.Product.getByCategory(id);
+    dispatch({
+      type:GET_ALL_CAR,
+      payload:data
+    })
+  } catch (error) {
+    
+  }
+  dispatch({
+    type: SET_SELECT_CATE,
+    payload: id,
+  });
+};
+
+export const deleteSelect = () => async (dispatch) => {
+  try {
+    const data = await agent.Product.getAll();
+    dispatch({
+      type:GET_ALL_CAR,
+      payload:data
+    })
+  } catch (error) {
+    
+  }
+  dispatch({
+    type: DELETE_SELECT_CATE,
+    payload: null,
+  });
 };

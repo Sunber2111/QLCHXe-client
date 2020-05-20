@@ -4,22 +4,31 @@ axios.defaults.baseURL = "https://localhost:5001/api";
 
 axios.interceptors.request.use(
   (config) => {
-    const token = window.localStorage.getItem("jwt");
+    const token = window.localStorage.getItem("x-auth");
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => {
+    console.log(error);
+
     return Promise.reject(error);
   }
 );
 
 const responseBody = (response) => response.data;
 
+const errorBody = (res) => {
+  throw res.response.data;
+};
+
 const request = {
-  get: async (url) => await axios.get(url).then(responseBody),
-  post: async (url, body) => await axios.post(url, body).then(responseBody),
-  put: async (url, body) => await axios.put(url, body).then(responseBody),
-  delete: async (url) => await axios.delete(url).then(responseBody),
+  get: async (url) => await axios.get(url).then(responseBody).catch(errorBody),
+  post: async (url, body) =>
+    await axios.post(url, body).then(responseBody).catch(errorBody),
+  put: async (url, body) =>
+    await axios.put(url, body).then(responseBody).catch(errorBody),
+  delete: async (url) =>
+    await axios.delete(url).then(responseBody).catch(errorBody),
 };
 
 const Product = {
@@ -31,6 +40,7 @@ const Product = {
   deleteCar: async (id) => await request.delete(`/xe/${id}`),
   addCar: async (car) => await request.post("/xe", car),
   updateCar: async (car) => await request.put("/xe", car),
+  getByCategory: async (id) => await request.get(`/xe/category/${id}`),
 };
 
 const Employee = {
@@ -61,11 +71,41 @@ const Phieu = {
   getAllPhieuXuat: async () => await request.get("/hdx"),
   deletePhieuXuat: async (id) => await request.delete(`/hdx/${id}`),
   addPhieuXuat: async (st) => await request.post("/hdx", st),
-  addCTPhieuXuat: async (st) => await request.post("/hdx/cthdx", st),
-  deleteCTPhieuXuat: async (id) => await request.get(`/hdx/cthdx/${id}`),
+
   getAllPhieuNhap: async () => await request.get("/hdn"),
   deletePhieuNhap: async (id) => await request.delete(`/hdn/${id}`),
   addPhieuNhap: async (st) => await request.post("/hdn", st),
+};
+
+const Account = {
+  login: async (data) => await request.post("/user/login", data),
+  getCurrent: async () => await request.get("/user/current"),
+  updateActive: async (id) => await request.put(`/user/active/${id}`),
+  getAll: async () => await request.get("/user"),
+  deleteAcc: async (id) => await request.delete(`/user/${id}`),
+  regis: async (acc) => await request.post("/user/regis", acc),
+};
+
+const Supplier = {
+  getAll: async () => await request.get("/ncc"),
+  deleteSup: async (id) => await request.delete(`/ncc/${id}`),
+  addSup: async (st) => await request.post("/ncc", st),
+  updateSup: async (st) => await request.put("/ncc", st),
+  gethdn: async (id) => await request.get(`/ncc/pur/${id}`),
+};
+
+const Photo = {
+  addPhoto: async (pic) => {
+    const formData = new FormData();
+    formData.append("files", pic);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    const res = await axios.post("/photo", formData, config);
+    return res.data;
+  },
 };
 
 export default {
@@ -74,4 +114,7 @@ export default {
   Customer,
   Store,
   Phieu,
+  Account,
+  Photo,
+  Supplier,
 };

@@ -2,7 +2,10 @@ import * as customer from "../constants/customer";
 
 const initialState = {
   cuses: [],
-  cusFilter: [],
+  filter: {
+    type: 0,
+    key: null,
+  },
   orders: {},
 };
 
@@ -44,6 +47,6 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     default:
-      return { ...state };
+      return state;
   }
 };

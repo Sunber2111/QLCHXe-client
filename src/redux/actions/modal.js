@@ -1,15 +1,18 @@
-import { CLOSE_MODAL, OPEN_MODAL } from "../constants/modal";
+import {
+  CLOSE_MODAL_MRU,
+  OPEN_MODAL_MRU,
+} from "../constants/modal";
 
-export const openModal = (body,size="tiny") => (dispatch) => {
+export const openModal = (body) => (dispatch) => {
   dispatch({
-    type: OPEN_MODAL,
-    payload: {body,size},
+    type: OPEN_MODAL_MRU,
+    payload: body,
   });
 };
 
 export const closeModal = () => (dispatch) => {
   dispatch({
-    type: CLOSE_MODAL,
-    payload: null,
+    type: CLOSE_MODAL_MRU,
+    payload: "",
   });
 };

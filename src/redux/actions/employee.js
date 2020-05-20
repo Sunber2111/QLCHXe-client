@@ -3,6 +3,7 @@ import {
   DELETE_EMP,
   UPDATE_EMP,
   GET_ALL_EMP,
+  SET_FILTER,
 } from "../constants/employee";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
@@ -19,9 +20,11 @@ export const getAll = () => async (dispatch) => {
 
 export const submit = (data) => async (dispatch) => {
   try {
+    if (data.hinhMoi) {
+      data.hinh = await agent.Photo.addPhoto(data.hinhMoi);
+    }
     if (!data.maNv) {
-      data.hinh = "https://localhost:5001/api/photo/hien.jpg";
-      const emp = await agent.Employee.addEmp({ ...data, maNv: v4() });
+      const emp = await agent.Employee.addEmp({ ...data });
       dispatch({
         type: ADD_EMP,
         payload: emp,

@@ -1,41 +1,45 @@
 import React, { Fragment } from "react";
-import Navigation from "../../containers/Navigation";
-import "./style.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CarPage from "../../components/Layout/CarPage";
-import ModalsContainer from "../../containers/Modal/ModalsContainer";
-import EmpPage from "../../components/Layout/EmpPage";
-import { Route, Switch } from "react-router-dom";
-import CusPage from "../../components/Layout/CusPage";
-import StorePage from "../../components/Layout/StorePage";
-import OrderPage from "../../components/Layout/OrderPage";
-import PurPage from "../../components/Layout/PurPage";
-import HomePage from "../../components/Layout/HomePage";
+import "antd/dist/antd.css";
+import "./css2.css";
+import "./style.scss";
+import Navigation from "../../containers/Navigation";
+import { Layout } from "antd";
+import HeaderNav from "../../containers/Header";
+import CarPage from "../../papes/car";
+import ModalContainer from "../../containers/ModalContainer";
+import EmpPape from "../../papes/emp";
+import ModalMruContainer from "../../containers/ModalMruContainer";
+import CusPage from "../../papes/cus";
+import SupPage from "../../papes/sup";
+import AccountPage from "../../papes/account";
+import PurchasingPage from "../../papes/pur";
+const { Content } = Layout;
+
 const App = () => {
+
   return (
     <Fragment>
-      <Route exact path="/" component={HomePage} />
-      <Route
-        path={"/(.+)"}
-        render={() => (
-          <Fragment>
-            <Navigation />
-            <div className="contain">
-              <Switch>
-                <Route exact path="/xe" component={CarPage} />
-                <Route exact path="/nhanvien" component={EmpPage} />
-                <Route exact path="/khachhang" component={CusPage} />
-                <Route exact path="/kho" component={StorePage} />
-                <Route exact path="/phieuxuat" component={OrderPage} />
-                <Route exact path="/phieunhap" component={PurPage} />
-              </Switch>
-            </div>
-          </Fragment>
-        )}
-      />
-      <ModalsContainer />
+      <Layout className="main-content">
+        <Navigation />
+        <Layout className="site-layout">
+          <HeaderNav />
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: "16px",
+              padding: 10,
+              minHeight: 280,
+            }}
+          >
+            <PurchasingPage/>
+          </Content>
+        </Layout>
+      </Layout>
+      <ModalContainer />
       <ToastContainer />
+      <ModalMruContainer />
     </Fragment>
   );
 };
