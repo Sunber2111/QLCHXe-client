@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app/layout/App";
 import { Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import "semantic-ui-css/semantic.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { createBrowserHistory } from "history";
 
 //Redux
 import { Provider } from "react-redux";

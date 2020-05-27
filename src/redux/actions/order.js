@@ -1,7 +1,6 @@
 import * as order from "../constants/order";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
-import { v4 } from "uuid";
 import { closeModal } from "./modal";
 
 export const getAll = () => async (dispatch) => {
@@ -12,42 +11,14 @@ export const getAll = () => async (dispatch) => {
   });
 };
 
-export const submit = (data) => async (dispatch) => {
+export const createOrder = (data) => async (dispatch) => {
   try {
-    const day = new Date();
-    const { maKh} = data;
+    await agent.Phieu.addPhieuXuat(data);
+    success("Tạo Thành Công");
 
-    const ngayXuat = day.toISOString();
-    let ctHdx = [];
-
-    data.CtHdx.forEach((ct) => {
-      ctHdx.push({
-        id: ct.id,
-        maXe: ct.maXe,
-        soKhung: ct.soKhung,
-        soMay: ct.soMay,
-        soLuong: ct.soLuong,
-        thueVat: ct.thueVat,
-        maKho: ct.maKho,
-      });
-    });
-
-    await agent.Phieu.addPhieuXuat({
-      maHdx,
-      maKh,
-      ngayXuat,
-      ctHdx
-    });
-
-    dispatch(getAll());
-
-    success("Thêm Thành Công");
-
-    dispatch(closeModal());
   } catch (error) {
     err("Thất Bại");
 
-    console.log(error);
   }
 };
 

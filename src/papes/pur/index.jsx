@@ -1,40 +1,27 @@
 import React from "react";
-import readXlsxFile from "read-excel-file";
-import { HdnSchema } from "../../app/models/hdn";
+import { Grid } from "semantic-ui-react";
+import "./styles.scss";
+import hand from "app/images/hand.png";
+import ex from "app/images/excel.png";
+import Paper from "@material-ui/core/Paper";
 
 const PurchasingPage = () => {
-  const fileSelectedhandler = (e) => {
-    const schema = { ...HdnSchema };
-
-    readXlsxFile(e.target.files[0], { schema }).then(({ rows, errors }) => {
-      console.log(rows);
-
-      console.log(errors);
-
-      let arrErrors = [];
-
-      errors.forEach((err) => {
-        if (err.error === "invalid")
-          arrErrors.push(
-            `Sai kiểu dữ liệu tại: Dòng ${err.row}, Cột ${err.column}`
-          );
-        else if (err.error === "required")
-          arrErrors.push(
-            `Dữ liệu bắt buộc phải có tại: Dòng ${err.row}, Cột ${err.column}`
-          );
-        else
-          arrErrors.push(`Dữ liệu sai tại: Dòng ${err.row}, Cột ${err.column}`);
-      });
-    });
-  };
-
   return (
-    <div>
-      <label className="custom-file-upload-car" style={{ background: "white" }}>
-        <input type="file" onChange={fileSelectedhandler} />
-        Chọn File Excel Thêm Xe
-      </label>
-    </div>
+    <Grid className="mx-auto mt-3">
+      <h2>Chọn Phương Thức Thêm Hóa Đơn Nhập</h2>
+      <Paper elevation={3} className="bg-pur mt-3 py-5">
+        <Grid divided>
+          <Grid.Column mobile={16} computer={8} className="d-flex flex-column">
+            <img src={hand} className="icon-pur mx-auto" alt="icon-hand" />
+            <h3 className="text-muted mx-auto">Thêm Thủ Công</h3>
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8} className="d-flex flex-column">
+            <img src={ex} className="icon-pur mx-auto" alt="icon-excel" />
+            <h3 className="text-muted mx-auto">Thêm Bằng File Excel</h3>
+          </Grid.Column>
+        </Grid>
+      </Paper>
+    </Grid>
   );
 };
 

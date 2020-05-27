@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAll } from "../../redux/actions/employee";
-import { Button, Segment, Icon } from "semantic-ui-react";
-import { openDialog } from "../../redux/actions/dialog";
+import { getAll } from "redux/actions/employee";
+import { Button, Segment } from "semantic-ui-react";
+import { openDialog } from "redux/actions/dialog";
 import { Table } from "antd";
 import { Label, Input, Dropdown } from "semantic-ui-react";
-import { convertDate } from "../../app/utils/tool";
-import FormCus from "../FormCus";
 import IOSSwitch from "../../components/switches";
 import { updateActiveAccount } from "../../redux/actions/account";
 import FormAccount from "../FormAccount";

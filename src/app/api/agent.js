@@ -56,6 +56,8 @@ const Customer = {
   addCus: async (kh) => await request.post("/khachhang", kh),
   updateCus: async (kh) => await request.put("/khachhang", kh),
   getOrder: async (id) => await request.get(`/khachhang/hoadon/${id}`),
+  getByPhone: async (sdt) => await request.get(`/khachhang/sdt/${sdt}`),
+  getByCMND: async (cmnd) => await request.get(`/khachhang/cmnd/${cmnd}`),
 };
 
 const Store = {
@@ -70,11 +72,11 @@ const Store = {
 const Phieu = {
   getAllPhieuXuat: async () => await request.get("/hdx"),
   deletePhieuXuat: async (id) => await request.delete(`/hdx/${id}`),
-  addPhieuXuat: async (st) => await request.post("/hdx", st),
+  addPhieuXuat: async (data) => await request.post("/hdx", data),
 
   getAllPhieuNhap: async () => await request.get("/hdn"),
   deletePhieuNhap: async (id) => await request.delete(`/hdn/${id}`),
-  addPhieuNhap: async (st) => await request.post("/hdn", st),
+  addDsPhieuNhap: async (list) => await request.post("/hdn/addlist", list),
 };
 
 const Account = {
@@ -92,6 +94,13 @@ const Supplier = {
   addSup: async (st) => await request.post("/ncc", st),
   updateSup: async (st) => await request.put("/ncc", st),
   gethdn: async (id) => await request.get(`/ncc/pur/${id}`),
+};
+
+const DoanhThu = {
+  getTop5: async () => await request.get("/doanhthu/top5"),
+  get12Month: async () => await request.get("/doanhthu"),
+  getFastNew: async ()=>await request.get("/doanhthu/fastnews"),
+  getTop3Car:async () => await request.get("/doanhthu/top3"),
 };
 
 const Photo = {
@@ -117,4 +126,5 @@ export default {
   Account,
   Photo,
   Supplier,
+  DoanhThu
 };

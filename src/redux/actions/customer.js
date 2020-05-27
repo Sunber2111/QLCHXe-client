@@ -49,14 +49,29 @@ export const deleteCus = (id) => async (dispatch) => {
   }
 };
 
-export const getOrder = id => async dispatch  =>
-{
+export const getOrder = (id) => async (dispatch) => {
   try {
     const data = await agent.Customer.getOrder(id);
     dispatch({
       type: customer.GET_ORDERS_OF_CUS,
-      payload: {data,id},
+      payload: { data, id },
     });
-  } catch (error) {
-  }
-}
+  } catch (error) {}
+};
+
+export const getCusBy = async (input, type = 1) => {
+  return new Promise(async (res, rej) => {
+    try {
+      let data ={};
+      if (type === 1) {
+        data = await agent.Customer.getByPhone(input);
+      } else {
+        data = await agent.Customer.getByCMND(input);
+      }
+      res(data);
+    } catch (error) {
+      console.log(error);
+      rej("has errors");
+    }
+  });
+};

@@ -71,18 +71,9 @@ const CarTable = () => {
       ),
     },
     {
-      title: "Giá Bán",
-      dataIndex: "giaXuat",
-      render: (giaXuat) => (
-        <Label as="a" color="red" tag>
-          {convertToPrice(giaXuat)}
-        </Label>
-      ),
-    },
-    {
       title: "Sửa",
       render: (text, record) => (
-        <Button basic color="yellow" onClick={() => handleUpdate(record)}>
+        <Button color="yellow" onClick={() => handleUpdate(record)}>
           Sửa
         </Button>
       ),
@@ -181,7 +172,7 @@ const CarTable = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
-              setItemSelect({ ...itemSelect, rowId: rowIndex + 1 });
+              setItemSelect({ ...itemSelect, rowId: record.maXe });
             },
           };
         }}

@@ -15,6 +15,11 @@ import CusPage from "../../papes/cus";
 import SupPage from "../../papes/sup";
 import AccountPage from "../../papes/account";
 import PurchasingPage from "../../papes/pur";
+import PagePurExcel from "containers/PagePurExcel";
+import PagePurHand from "containers/PagePurHand";
+import ChartPage from "../../papes/chart";
+import OrderPage from "papes/order";
+
 const { Content } = Layout;
 
 const App = () => {
@@ -26,14 +31,14 @@ const App = () => {
         <Layout className="site-layout">
           <HeaderNav />
           <Content
-            className="site-layout-background"
+            className="site-layout-background m-3"
             style={{
-              margin: "16px",
               padding: 10,
               minHeight: 280,
             }}
+
           >
-            <PurchasingPage/>
+            
           </Content>
         </Layout>
       </Layout>

@@ -4,11 +4,18 @@ import { success, error as err } from "../../app/notify";
 import { closeDialog } from "./dialog";
 
 export const getAll = () => async (dispatch) => {
-  const data = await agent.Product.getAll();
-  dispatch({
-    type: GET_ALL_CAR,
-    payload: data,
-  });
+  return new Promise(async (res,rej)=>{
+    try { 
+      const data = await agent.Product.getAll();
+      dispatch({
+        type: GET_ALL_CAR,
+        payload: data,
+      });
+      res(data)
+    } catch (error) {
+      err("Có Lỗi")
+    }
+  })
 };
 
 export const submit = (data) => async (dispatch) => {

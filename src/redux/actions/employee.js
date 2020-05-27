@@ -7,7 +7,6 @@ import {
 } from "../constants/employee";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
-import { v4 } from "uuid";
 import { closeModal } from "./modal";
 
 export const getAll = () => async (dispatch) => {

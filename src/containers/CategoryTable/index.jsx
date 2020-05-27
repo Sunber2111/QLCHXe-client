@@ -36,11 +36,11 @@ const CategoryTable = () => {
 
   useEffect(() => {
     dispatch(getAll());
-  }, []);
+  }, [dispatch]);
 
   const handleUpdate = useCallback((record) => {
     dispatch(openDialog(<FormCategory cate={record} />, "Thêm Loại Xe"));
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     swal({
@@ -84,7 +84,7 @@ const CategoryTable = () => {
   ];
 
   const setRowClassName = (record) => {
-    return record.maLoaiXe == itemSelect.rowId && isSelect != null
+    return record.maLoaiXe === itemSelect.rowId && isSelect != null
       ? "clickRowStyl"
       : "";
   };

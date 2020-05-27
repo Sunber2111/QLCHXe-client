@@ -94,11 +94,13 @@ const FormCus = ({ cus }) => {
           />
         </div>
       </div>
-      <div className="btn-sub-cus">
-        <Button color="green" onClick={handleUpdate} type="submit">
-          Sửa
-        </Button>
-      </div>
+      {cus && (
+        <div className="btn-sub-cus">
+          <Button color="green" onClick={handleUpdate} type="submit">
+            Sửa
+          </Button>
+        </div>
+      )}
     </form>
   );
 };

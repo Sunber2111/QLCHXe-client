@@ -2,11 +2,8 @@ import * as customer from "../constants/customer";
 
 const initialState = {
   cuses: [],
-  filter: {
-    type: 0,
-    key: null,
-  },
-  orders: {},
+  cusFilter:{}
+
 };
 
 export default (state = initialState, { type, payload }) => {

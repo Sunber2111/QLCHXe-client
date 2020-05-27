@@ -23,3 +23,15 @@ export const success = (msg) => {
     transition: Zoom,
   });
 };
+
+export const warning = (msg) => {
+  toast.warning(msg, {
+    position: "top-right",
+    autoClose: 3800,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    transition: Zoom,
+  });
+};

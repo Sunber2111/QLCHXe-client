@@ -11,6 +11,7 @@ import dialog from "./dialog";
 import account from "./account";
 import supplier from "./supplier";
 import nav from "./nav";
+import doanhthu from "./doanhthu";
 
 export default combineReducers({
   category,
@@ -25,4 +26,5 @@ export default combineReducers({
   dialog,
   account,
   supplier,
+  doanhthu,
 });

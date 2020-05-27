@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Image, Input, Button } from "semantic-ui-react";
-import { getAll, setFilter } from "../../redux/actions/employee";
+import { Grid, Input } from "semantic-ui-react";
+import { getAll } from "../../redux/actions/employee";
 import CardEmp from "../CardEmp";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -29,7 +29,7 @@ const EmployeeTable = () => {
   const createData = () => {
     let arr = [];
 
-    if (keyInput == "" || keyInput == null) {
+    if (keyInput === "" || keyInput === null) {
       emps.map((emp) => arr.push(<CardEmp emp={emp} />));
       return arr;
     }

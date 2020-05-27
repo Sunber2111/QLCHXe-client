@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAll } from "../../redux/actions/customer";
 import { Button, Segment } from "semantic-ui-react";
@@ -109,12 +109,12 @@ const CustomerTable = () => {
   }, [dispatch]);
 
   const setRowClassName = (record) => {
-    return record.maKh == itemSelect.rowId ? "clickRowStyl" : "";
+    return record.maKh === itemSelect.rowId ? "clickRowStyl" : "";
   };
 
 
   const createData = () => {
-    if (keyInput == null || keyInput == "") return cuses;
+    if (keyInput === null || keyInput === "") return cuses;
 
     switch (select) {
       case 0: {

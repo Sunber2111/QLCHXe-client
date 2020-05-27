@@ -1,7 +1,6 @@
 import * as pur from "../constants/pur";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
-import { v4 } from "uuid";
 import { closeModal } from "./modal";
 
 export const getAll = () => async (dispatch) => {
@@ -14,28 +13,8 @@ export const getAll = () => async (dispatch) => {
 
 export const submit = (data) => async (dispatch) => {
   try {
-    const day = new Date();
-    const { maNcc } = data;
-
-    const ngayNhap = day.toISOString();
-    let ctHdn = [];
-
-    data.CtHdn.forEach((ct) => {
-      ctHdn.push({
-        id: ct.id,
-        maXe: ct.maXe,
-        soLuong: ct.soLuong,
-        thueVat: ct.thueVat,
-        maKho: ct.maKho,
-      });
-    });
-
-    await agent.Phieu.addPhieuNhap({
-      maHdn,
-      maNcc,
-      ngayNhap,
-      ctHdn
-    });
+    
+    await agent.Phieu.addDsPhieuNhap(data);
 
     dispatch(getAll());
 
@@ -43,7 +22,7 @@ export const submit = (data) => async (dispatch) => {
 
     dispatch(closeModal());
   } catch (error) {
-    err("Thất Bại");
+    err(error);
 
     console.log(error);
   }

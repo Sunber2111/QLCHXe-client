@@ -27,3 +27,17 @@ public string SoMay { get; set; }
 
 **Nếu đã tồn tại xe thì chỉ nhập Id **
 
+tong nv
+tong phieu xuat trong ngay hom nay
+tong khach hang
+tong tk
+
+[KhachHang]
+public string TenKh { get; set; }
+public string DiaChi { get; set; }
+public bool GioiTinh { get; set; }
+public string Cmnd { get; set; }
+public string Sdt { get; set; }
+public DateTime NgaySinh { get; set; }
+
+

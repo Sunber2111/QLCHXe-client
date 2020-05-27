@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAll } from "../../redux/actions/supplier";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Segment, Icon } from "semantic-ui-react";
 import { openDialog } from "../../redux/actions/dialog";
 import { Table } from "antd";
 import { Label, Input, Dropdown } from "semantic-ui-react";
 import FormSup from "../FormSup";
+import "./styles.scss";
 
 const rowSelection = {
   getCheckboxProps: () => ({
@@ -24,10 +25,10 @@ const rowSelection = {
 const options = [
   { key: 0, text: "Tất Cả", value: 0 },
   { key: 1, text: "Mã Nhà Cung Cấp", value: 1 },
-  { key: 2, text: "Tên Nhà Cung Cấp", value: 2 }
+  { key: 2, text: "Tên Nhà Cung Cấp", value: 2 },
 ];
 
-const SupTable = () => {
+const SupTable = ({ columnsCustom,setDataSelect }) => {
   const [select, setSelect] = useState(0);
 
   const [keyInput, setKeyInput] = useState("");
@@ -103,7 +104,9 @@ const SupTable = () => {
         return item ? [{ ...item }] : [];
       }
       case 2: {
-        return sups.filter((cus) => cus.tenNcc.toLowerCase().indexOf(keyInput.toLowerCase()) >= 0);
+        return sups.filter(
+          (cus) => cus.tenNcc.toLowerCase().indexOf(keyInput.toLowerCase()) >= 0
+        );
       }
       default:
         break;
@@ -134,22 +137,26 @@ const SupTable = () => {
                 />
               }
               icon="search"
-              className="search-car"
+              className={columnsCustom ? "custom-search-car" : "search-car"}
               iconPosition="left"
               value={keyInput}
               onChange={handleFind}
               placeholder="Tìm Kiếm Theo..."
             />
+            
           </div>
         )}
         rowSelection={{
           ...rowSelection,
         }}
-        columns={columns}
+        columns={columnsCustom ? columnsCustom : columns}
         dataSource={[...createData()]}
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
+
+              setDataSelect(record);
+              
               setItemSelect({ ...itemSelect, rowId: rowIndex + 1 });
             },
           };
@@ -161,4 +168,4 @@ const SupTable = () => {
   );
 };
 
-export default SupTable;
+export default React.memo(SupTable);
