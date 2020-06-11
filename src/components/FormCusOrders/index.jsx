@@ -6,9 +6,7 @@ import moment from "moment";
 import { useState } from "react";
 import { Segment } from "semantic-ui-react";
 
-const FormCusOrders = ({ load, dataCus,setCus }) => {
-
-
+const FormCusOrders = ({ load, dataCus, setCus }) => {
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
   const onChange = (date) => {
@@ -40,6 +38,7 @@ const FormCusOrders = ({ load, dataCus,setCus }) => {
           name="tenKh"
           onChange={handleChange}
           label="Tên Khách Hàng"
+          className="mb-3"
           fullWidth
           variant="outlined"
         />
@@ -47,6 +46,7 @@ const FormCusOrders = ({ load, dataCus,setCus }) => {
           value={dataCus.sdt || ""}
           name="sdt"
           onChange={handleChange}
+          className="mb-3"
           label="Số Điện Thoại"
           fullWidth
           variant="outlined"
@@ -56,6 +56,7 @@ const FormCusOrders = ({ load, dataCus,setCus }) => {
           name="diaChi"
           onChange={handleChange}
           label="Địa Chỉ"
+          className="mb-3"
           fullWidth
           variant="outlined"
         />
@@ -64,20 +65,23 @@ const FormCusOrders = ({ load, dataCus,setCus }) => {
           name="cmnd"
           onChange={handleChange}
           label="CMND"
+          className="mb-3"
           fullWidth
           variant="outlined"
         />
-        <div className="info-s-d">
-          <div className="info-s">
+        <div className="row ">
+          <div className="col">
             <p>Giới Tính</p>
             <Switch
               checked={dataCus.gioiTinh}
-              onChange={(e) => setCus({ ...dataCus, gioiTinh: !dataCus.gioiTinh })}
+              onChange={(e) =>
+                setCus({ ...dataCus, gioiTinh: !dataCus.gioiTinh })
+              }
               name="gioiTinh"
             />
             <p>{dataCus.gioiTinh ? "Nam" : "Nữ"}</p>
           </div>
-          <div>
+          <div className="col">
             <p>Ngày Sinh</p>
             <DatePicker
               value={moment(new Date(dataCus.ngaySinh), dateFormatList[0])}

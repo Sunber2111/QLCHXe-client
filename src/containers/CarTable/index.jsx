@@ -32,6 +32,8 @@ const options = [
 const CarTable = () => {
   const [select, SetSelect] = useState(0);
 
+  const maCV = useSelector((s) => s.account.currentUser.maChucVu);
+
   const [keyInput, setKeyInput] = useState("");
 
   const [itemSelect, setItemSelect] = useState({
@@ -39,6 +41,40 @@ const CarTable = () => {
   });
 
   const columns = [
+    {
+      title: "Mã Xe",
+      dataIndex: "maXe",
+    },
+    {
+      title: "Tên Xe",
+      dataIndex: "tenXe",
+    },
+
+    {
+      title: "Loại Xe",
+      dataIndex: "loaiXe",
+    },
+    {
+      title: "Số Khung",
+      dataIndex: "soKhung",
+      render: (soKhung) => (
+        <Tag color="geekblue" key={soKhung}>
+          {soKhung}
+        </Tag>
+      ),
+    },
+    {
+      title: "Số Máy",
+      dataIndex: "soMay",
+      render: (soMay) => (
+        <Tag color="green" key={soMay}>
+          {soMay}
+        </Tag>
+      ),
+    },
+  ];
+
+  const columnsAdmin = [
     {
       title: "Mã Xe",
       dataIndex: "maXe",
@@ -167,7 +203,7 @@ const CarTable = () => {
         rowSelection={{
           ...rowSelection,
         }}
-        columns={columns}
+        columns={maCV >= 3 ? columnsAdmin : columns}
         dataSource={createData()}
         onRow={(record, rowIndex) => {
           return {

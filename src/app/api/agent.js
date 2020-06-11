@@ -48,6 +48,7 @@ const Employee = {
   deleteEmp: async (id) => await request.delete(`/nhanvien/${id}`),
   addEmp: async (nv) => await request.post("/nhanvien", nv),
   updateEmp: async (nv) => await request.put("/nhanvien", nv),
+  getById: async (id) => await request.get(`/nhanvien/${id}`),
 };
 
 const Customer = {
@@ -86,6 +87,8 @@ const Account = {
   getAll: async () => await request.get("/user"),
   deleteAcc: async (id) => await request.delete(`/user/${id}`),
   regis: async (acc) => await request.post("/user/regis", acc),
+  resetPassword: async (username) =>
+    await request.get(`/user/sendmess/email/${username}`),
 };
 
 const Supplier = {
@@ -99,8 +102,8 @@ const Supplier = {
 const DoanhThu = {
   getTop5: async () => await request.get("/doanhthu/top5"),
   get12Month: async () => await request.get("/doanhthu"),
-  getFastNew: async ()=>await request.get("/doanhthu/fastnews"),
-  getTop3Car:async () => await request.get("/doanhthu/top3"),
+  getFastNew: async () => await request.get("/doanhthu/fastnews"),
+  getTop3Car: async () => await request.get("/doanhthu/top3"),
 };
 
 const Photo = {
@@ -126,5 +129,5 @@ export default {
   Account,
   Photo,
   Supplier,
-  DoanhThu
+  DoanhThu,
 };

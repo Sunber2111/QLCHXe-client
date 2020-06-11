@@ -57,3 +57,14 @@ export const deleteEmp = (id) => async (dispatch) => {
     err("Xóa Thất Bại");
   }
 };
+
+export const getById = async (id) =>  {
+ return new Promise(async(res,rej)=>{
+   try {
+     const data = await agent.Employee.getById(id);
+     res(data)
+   } catch (error) {
+     res("Thất Bại")
+   }
+ })
+};

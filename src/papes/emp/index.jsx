@@ -16,7 +16,7 @@ const EmpPape = () => {
   }
 
   return (
-    <div>
+    <div className='mx-auto'>
       <div className="info-emp-pape">
         <h2>Danh Sách nhân Viên</h2>
         <Button color="green" onClick={handleOpen}>

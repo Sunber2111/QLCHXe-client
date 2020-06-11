@@ -5,6 +5,8 @@ import { Router } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserHistory } from "history";
+import "react-toastify/dist/ReactToastify.css";
+import "antd/dist/antd.css";
 
 //Redux
 import { Provider } from "react-redux";

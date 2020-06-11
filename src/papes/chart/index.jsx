@@ -20,9 +20,9 @@ const ChartPage = () => {
   }, [dispatch]);
 
   return (
-    <Grid>
+    <Grid className="mx-auto mt-2">
       <FastNews data={fn} />
-      <GridRow className="pt-0">
+      <GridRow className="mx-auto">
         <GridColumn computer={5} mobile={16} className="mb-4">
           <Paper>
             <div className="mx-auto pt-3 text-center ">

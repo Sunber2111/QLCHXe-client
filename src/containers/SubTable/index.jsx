@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAll } from "../../redux/actions/supplier";
-import { Button, Segment, Icon } from "semantic-ui-react";
-import { openDialog } from "../../redux/actions/dialog";
+import { getAll } from "redux/actions/supplier";
+import { Button, Segment, Grid, GridColumn, GridRow } from "semantic-ui-react";
+import { openDialog } from "redux/actions/dialog";
 import { Table } from "antd";
 import { Label, Input, Dropdown } from "semantic-ui-react";
 import FormSup from "../FormSup";
@@ -28,7 +28,7 @@ const options = [
   { key: 2, text: "Tên Nhà Cung Cấp", value: 2 },
 ];
 
-const SupTable = ({ columnsCustom,setDataSelect }) => {
+const SupTable = ({ columnsCustom, setDataSelect }) => {
   const [select, setSelect] = useState(0);
 
   const [keyInput, setKeyInput] = useState("");
@@ -41,7 +41,34 @@ const SupTable = ({ columnsCustom,setDataSelect }) => {
 
   const { sups } = useSelector((s) => s.supplier);
 
+  const maCV = useSelector((s) => s.account.currentUser.maChucVu);
+
   const columns = [
+    {
+      title: "Mã Nhà Cung Cấp",
+      dataIndex: "maNcc",
+    },
+    {
+      title: "Tên Nhà Cung Cấp",
+      dataIndex: "tenNcc",
+    },
+
+    {
+      title: "Địa Chỉ",
+      dataIndex: "diaChi",
+    },
+    {
+      title: "Số Điện Thoại",
+      dataIndex: "sdt",
+      render: (sdt) => (
+        <Label color="green" key={sdt} basic>
+          {sdt}
+        </Label>
+      ),
+    },
+  ];
+
+  const columnsAdmin = [
     {
       title: "Mã Nhà Cung Cấp",
       dataIndex: "maNcc",
@@ -88,10 +115,6 @@ const SupTable = ({ columnsCustom,setDataSelect }) => {
     return record.maNcc == itemSelect.rowId ? "clickRowStyl" : "";
   };
 
-  const handleCloseSelect = (e) => {
-    // dispatch(deleteSelect());
-  };
-
   const createData = () => {
     if (keyInput == null || keyInput == "") return sups;
 
@@ -117,46 +140,63 @@ const SupTable = ({ columnsCustom,setDataSelect }) => {
     setKeyInput(value);
   };
 
+  const handleAdd = () => {
+    dispatch(openDialog(<FormSup />));
+  };
+
   return (
     <Segment className="bg-clear-p-0">
       <Table
         key="tableCar"
         title={() => (
-          <div className="title-cars">
-            <h3>Danh Sách Nhà Cung Cấp</h3>
-            <Input
-              action={
-                <Dropdown
-                  button
-                  basic
-                  floating
-                  value={select}
-                  onChange={(e, { value }) => setSelect(value)}
-                  options={options}
-                  defaultValue={0}
+          <Grid>
+            <GridRow>
+              <GridColumn computer={4} mobile={16}>
+                <Label color="red" basic>
+                  <h3>Danh Sách Nhà Cung Cấp</h3>
+                </Label>
+              </GridColumn>
+              <GridColumn computer={9} mobile={16}>
+                <Input
+                  action={
+                    <Dropdown
+                      button
+                      basic
+                      floating
+                      value={select}
+                      onChange={(e, { value }) => setSelect(value)}
+                      options={options}
+                      defaultValue={0}
+                    />
+                  }
+                  icon="search"
+                  className="cmt-2"
+                  iconPosition="left"
+                  value={keyInput}
+                  onChange={handleFind}
+                  placeholder="Tìm Kiếm Theo..."
                 />
-              }
-              icon="search"
-              className={columnsCustom ? "custom-search-car" : "search-car"}
-              iconPosition="left"
-              value={keyInput}
-              onChange={handleFind}
-              placeholder="Tìm Kiếm Theo..."
-            />
-            
-          </div>
+              </GridColumn>
+              <GridColumn computer={3} mobile={16}>
+                <Button color="green" onClick={handleAdd}>
+                  Thêm Nhà Cung Cấp
+                </Button>
+              </GridColumn>
+            </GridRow>
+          </Grid>
         )}
         rowSelection={{
           ...rowSelection,
         }}
-        columns={columnsCustom ? columnsCustom : columns}
+        columns={
+          columnsCustom ? columnsCustom : maCV >= 3 ? columnsAdmin : columns
+        }
         dataSource={[...createData()]}
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
+              if (setDataSelect) setDataSelect(record);
 
-              setDataSelect(record);
-              
               setItemSelect({ ...itemSelect, rowId: rowIndex + 1 });
             },
           };

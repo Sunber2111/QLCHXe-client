@@ -26,6 +26,8 @@ const rowSelection = {
 };
 
 const CategoryTable = () => {
+  const maCV = useSelector((s) => s.account.currentUser.maChucVu);
+
   const [itemSelect, setItemSelect] = useState({
     rowId: null,
   });
@@ -38,9 +40,12 @@ const CategoryTable = () => {
     dispatch(getAll());
   }, [dispatch]);
 
-  const handleUpdate = useCallback((record) => {
-    dispatch(openDialog(<FormCategory cate={record} />, "Thêm Loại Xe"));
-  }, [dispatch]);
+  const handleUpdate = useCallback(
+    (record) => {
+      dispatch(openDialog(<FormCategory cate={record} />, "Thêm Loại Xe"));
+    },
+    [dispatch]
+  );
 
   const handleDelete = (id) => {
     swal({
@@ -56,6 +61,14 @@ const CategoryTable = () => {
   };
 
   const columns = [
+    {
+      title: "Tên",
+      key: "tenLoaiXe",
+      dataIndex: "tenLoaiXe",
+    },
+  ];
+
+  const columnAdmin = [
     {
       title: "Tên",
       key: "tenLoaiXe",
@@ -95,9 +108,11 @@ const CategoryTable = () => {
 
   return (
     <Fragment>
-      <div className="btn-add-cate" onClick={handleAdd}>
-        Thêm Loại Xe
-      </div>
+      {maCV >= 3 && (
+        <div className="btn-add-cate" onClick={handleAdd}>
+          Thêm Loại Xe
+        </div>
+      )}
       <Table
         key="tableCategory"
         title={() => <h2>Danh Sách Loại Xe</h2>}
@@ -105,7 +120,7 @@ const CategoryTable = () => {
           ...rowSelection,
         }}
         pagination={{ pageSize: 8 }}
-        columns={columns} 
+        columns={maCV >= 4 ? columnAdmin : columns}
         dataSource={[...categories]}
         onRow={(record, rowIndex) => {
           return {

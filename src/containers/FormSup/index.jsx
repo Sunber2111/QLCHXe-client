@@ -25,7 +25,7 @@ const FormSup = ({ sup }) => {
     <form
       noValidate
       autoComplete="off"
-      className="form-cus"
+      className="form-cus mt-4"
       onSubmit={(e) => e.preventDefault()}
     >
       <TextField
@@ -53,8 +53,8 @@ const FormSup = ({ sup }) => {
         variant="outlined"
       />
       <div className="btn-sub-cus">
-        <Button color="green" onClick={handleUpdate} type="submit">
-          Sửa
+        <Button color="youtube" onClick={handleUpdate}>
+         {sup?"Sửa":"Thêm"}
         </Button>
       </div>
     </form>

@@ -1,8 +1,8 @@
 import React from "react";
-import AccountTable from "../../containers/AccountTable";
+import AccountTable from "containers/AccountTable";
 
 const AccountPage = () => {
-  return <div>
+  return <div className='mx-auto'>
       <AccountTable/>
   </div>;
 };

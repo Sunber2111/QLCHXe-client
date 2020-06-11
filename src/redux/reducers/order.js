@@ -2,7 +2,6 @@ import * as order from "../constants/order";
 
 const initialState = {
   orders: [],
-  ordersFilter: [],
   isSelect: {},
 };
 

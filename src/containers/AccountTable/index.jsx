@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAll } from "redux/actions/employee";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Segment, GridRow, GridColumn,Grid } from "semantic-ui-react";
 import { openDialog } from "redux/actions/dialog";
 import { Table } from "antd";
 import { Label, Input, Dropdown } from "semantic-ui-react";
@@ -162,29 +162,36 @@ const AccountTable = () => {
       <Table
         key="tableCar"
         title={() => (
-          <div className="title-cars">
-            <h2 style={{ fontWeight: "800 !important" }}>
-              Danh Sách Tài Khoản
-            </h2>
-            <Input
-              action={
-                <Dropdown
-                  button
-                  basic
-                  floating
-                  value={select}
-                  onChange={(e, { value }) => setSelect(value)}
-                  options={options}
-                  defaultValue={0}
-                />
-              }
-              icon="search"
-              className="search-car"
-              iconPosition="left"
-              value={keyInput}
-              onChange={handleFind}
-              placeholder="Tìm Kiếm Theo..."
-            />
+          <div>
+            <Grid >
+              <GridRow>
+                <GridColumn computer={4} mobile={16}>
+                  <Label color="blue" basic>
+                    <p style={{fontSize:"23px"}} className="text-primary">Danh Sách Tài Khoản</p>
+                  </Label>
+                </GridColumn>
+                <GridColumn className="cmt-2" computer={11} mobile={16}>
+                  <Input
+                    action={
+                      <Dropdown
+                        button
+                        basic
+                        floating
+                        value={select}
+                        onChange={(e, { value }) => setSelect(value)}
+                        options={options}
+                        defaultValue={0}
+                      />
+                    }
+                    icon="search"
+                    iconPosition="left"
+                    value={keyInput}
+                    onChange={handleFind}
+                    placeholder="Tìm Kiếm Theo..."
+                  />
+                </GridColumn>
+              </GridRow>
+            </Grid>
           </div>
         )}
         rowSelection={{

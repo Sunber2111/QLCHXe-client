@@ -3,7 +3,7 @@ import CustomerTable from '../../containers/CusomerTable'
 
 const CusPage = () => {
     return (
-        <div>
+        <div className='mx-auto'>
             <CustomerTable/>
         </div>
     )

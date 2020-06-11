@@ -30,7 +30,7 @@ const EmployeeTable = () => {
     let arr = [];
 
     if (keyInput === "" || keyInput === null) {
-      emps.map((emp) => arr.push(<CardEmp emp={emp} />));
+      emps.map((emp) => arr.push(<CardEmp emp={emp}  />));
       return arr;
     }
 
@@ -59,7 +59,7 @@ const EmployeeTable = () => {
   };
 
   return (
-    <div>
+    <div className='mx-auto'>
       <Input
         type="text"
         placeholder="Tìm Theo..."
@@ -78,7 +78,7 @@ const EmployeeTable = () => {
           </Select>
         </FormControl>
       </Input>
-      <Grid style={{ marginTop: "20px" }}>
+      <Grid style={{ marginTop: "20px" }} className='mx-auto'>
         <Grid.Row>{createData()}</Grid.Row>
       </Grid>
     </div>

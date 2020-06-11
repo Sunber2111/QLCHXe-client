@@ -5,14 +5,16 @@ import CategoryTable from "../../containers/CategoryTable";
 import CarTable from "../../containers/CarTable";
 
 const CarPage = () => {
+
+
   return (
-    <Grid>
-      <Grid.Column width={4} className="bg-clear-1">
+    <Grid className='mx-auto'>
+      <Grid.Column computer={5} mobile={16} className="bg-clear-1">
         <Segment className="bg-clear">
           <CategoryTable />
         </Segment>
       </Grid.Column>
-      <Grid.Column width={12}>
+      <Grid.Column computer={11} mobile={16}>
         <CarTable />
       </Grid.Column>
     </Grid>

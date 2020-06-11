@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAll } from "../../redux/actions/customer";
+import { getAll } from "redux/actions/customer";
 import { Button, Segment } from "semantic-ui-react";
-import { openDialog } from "../../redux/actions/dialog";
+import { openDialog } from "redux/actions/dialog";
 import { Table } from "antd";
-import { Label, Input, Dropdown } from "semantic-ui-react";
-import { convertDate } from "../../app/utils/tool";
+import {
+  Label,
+  Input,
+  Dropdown,
+  Grid,
+  GridColumn,
+  GridRow,
+} from "semantic-ui-react";
+import { convertDate } from "app/utils/tool";
 import FormCus from "../FormCus";
 
 const rowSelection = {
@@ -112,7 +119,6 @@ const CustomerTable = () => {
     return record.maKh === itemSelect.rowId ? "clickRowStyl" : "";
   };
 
-
   const createData = () => {
     if (keyInput === null || keyInput === "") return cuses;
 
@@ -125,7 +131,9 @@ const CustomerTable = () => {
         return item ? [{ ...item }] : [];
       }
       case 2: {
-        return cuses.filter((cus) => cus.toLowerCase().indexOf(keyInput.toLowerCase()) >= 0)
+        return cuses.filter(
+          (cus) => cus.tenKh.toLowerCase().indexOf(keyInput.toLowerCase()) >= 0
+        );
       }
       case 3: {
         const item = cuses.find((cus) => cus.cmnd.includes(keyInput));
@@ -149,28 +157,36 @@ const CustomerTable = () => {
       <Table
         key="tableCar"
         title={() => (
-          <div className="title-cars">
-            <h3>Danh Sách Khách Hàng</h3>
-            <Input
-              action={
-                <Dropdown
-                  button
-                  basic
-                  floating
-                  value={select}
-                  onChange={(e, { value }) => setSelect(value)}
-                  options={options}
-                  defaultValue={0}
+          <Grid>
+            <GridRow>
+              <GridColumn computer={4} mobile={16}>
+                <Label color="red" basic>
+                  <h3>Danh Sách Khách Hàng</h3>
+                </Label>
+              </GridColumn>
+              <GridColumn computer={11} mobile={16}>
+                <Input
+                  action={
+                    <Dropdown
+                      button
+                      basic
+                      floating
+                      value={select}
+                      onChange={(e, { value }) => setSelect(value)}
+                      options={options}
+                      defaultValue={0}
+                    />
+                  }
+                  icon="search"
+                  className="cmt-2"
+                  iconPosition="left"
+                  value={keyInput}
+                  onChange={handleFind}
+                  placeholder="Tìm Kiếm Theo..."
                 />
-              }
-              icon="search"
-              className="search-car"
-              iconPosition="left"
-              value={keyInput}
-              onChange={handleFind}
-              placeholder="Tìm Kiếm Theo..."
-            />
-          </div>
+              </GridColumn>
+            </GridRow>
+          </Grid>
         )}
         rowSelection={{
           ...rowSelection,

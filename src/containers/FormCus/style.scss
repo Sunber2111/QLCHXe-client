@@ -1,7 +1,5 @@
 .form-cus {
-    .MuiTextField-root {
-        margin-bottom: 20px;
-    }
+    
     .info-s-d {
         display: flex;
         .info-s {
@@ -12,4 +10,8 @@
         display: flex;
         justify-content: center;
     }
+}
+
+.MuiFormControl-fullWidth{
+    margin-bottom: 20px !important;
 }

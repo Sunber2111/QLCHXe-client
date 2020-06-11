@@ -46,6 +46,7 @@ const FormCus = ({ cus }) => {
       <TextField
         value={data.tenKh}
         name="tenKh"
+        className="mb-3"
         onChange={handleChange}
         label="Tên Khách Hàng"
         fullWidth

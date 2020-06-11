@@ -12,3 +12,16 @@
         color: white !important;
     }
 }
+
+.custom-file-upload-car{
+    border: 1.2px solid #2eeb7d;
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 2.4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    display: none;
+}

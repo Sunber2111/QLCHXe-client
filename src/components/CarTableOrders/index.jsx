@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Segment, GridRow, GridColumn ,Grid} from "semantic-ui-react";
 import { Table } from "antd";
 import { Label, Input, Dropdown } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
@@ -58,7 +58,9 @@ const CarTableOrders = ({ cars, onAddCar }) => {
     {
       title: "Tên Kho",
       dataIndex: "tenKho",
-      render: (tenKho) => <Chip label={tenKho} style={{background:colorP,color:"white"}} />,
+      render: (tenKho) => (
+        <Chip label={tenKho} style={{ background: colorP, color: "white" }} />
+      ),
     },
     {
       title: "Số Khung",
@@ -121,31 +123,37 @@ const CarTableOrders = ({ cars, onAddCar }) => {
       <Table
         key="tableCar"
         title={() => (
-          <div className="title-cars">
-            <Label color="red">
-              <p style={{ fontSize: "20px" }}> Danh Sách Xe</p>
-            </Label>
-            <Input
-              action={
-                <Dropdown
-                  button
-                  basic
-                  floating
-                  options={options}
-                  value={select}
-                  onChange={(e, { value }) => {
-                    SetSelect(value);
-                  }}
+          <Grid>
+            <GridRow>
+              <GridColumn computer={5} mobile={16}>
+                <Label color="red">
+                  <p style={{ fontSize: "20px" }}> Danh Sách Xe</p>
+                </Label>
+              </GridColumn>
+              <GridColumn computer={11} mobile={16}>
+                <Input
+                  action={
+                    <Dropdown
+                      button
+                      basic
+                      floating
+                      options={options}
+                      value={select}
+                      onChange={(e, { value }) => {
+                        SetSelect(value);
+                      }}
+                    />
+                  }
+                  icon="search"
+                  className="cmt-2"
+                  iconPosition="left"
+                  value={keyInput}
+                  onChange={(e) => setKeyInput(e.target.value)}
+                  placeholder="Tìm Kiếm Theo..."
                 />
-              }
-              icon="search"
-              className="search-car-od"
-              iconPosition="left"
-              value={keyInput}
-              onChange={(e) => setKeyInput(e.target.value)}
-              placeholder="Tìm Kiếm Theo..."
-            />
-          </div>
+              </GridColumn>
+            </GridRow>
+          </Grid>
         )}
         rowSelection={{
           ...rowSelection,

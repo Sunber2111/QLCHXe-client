@@ -72,7 +72,7 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-const FormEmp = ({ emp }) => {
+const FormEmp = ({ emp, custom=false }) => {
   const [data, setData] = useState(
     emp
       ? emp
@@ -82,6 +82,7 @@ const FormEmp = ({ emp }) => {
           gioiTinh: false,
           hinh: "",
           maChucVu: null,
+          email: "",
           sdt: "",
           tenNv: "",
           ngaySinh: Date.now(),
@@ -97,7 +98,6 @@ const FormEmp = ({ emp }) => {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
 
   const handleChangeDate = (date) => {
     try {
@@ -170,6 +170,15 @@ const FormEmp = ({ emp }) => {
             />
           </Grid.Column>
           <Grid.Column mobile={16} computer={8}>
+            <TextField
+              className="input-emp"
+              label="Email"
+              name="email"
+              value={data.email}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
             <div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -204,23 +213,25 @@ const FormEmp = ({ emp }) => {
                 />
               </FormGroup>
             </div>
-            <div style={{ marginTop: "20px" }}>
-              <p>Chọn Chức Vụ</p>
-              <FormControl variant="outlined" className="form-emp-cv">
-                <InputLabel>Chức Vụ</InputLabel>
-                <Select
-                  name="maChucVu"
-                  value={data.maChucVu}
-                  onChange={handleChange}
-                  label="Chức vụ"
-                >
-                  <MenuItem value={null}>none</MenuItem>
-                  <MenuItem value={1}>Nhân Viên</MenuItem>
-                  <MenuItem value={2}>Nhân Viên Kho</MenuItem>
-                  <MenuItem value={3}>Quản Lý</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+            {custom===false && (
+              <div style={{ marginTop: "20px" }}>
+                <p>Chọn Chức Vụ</p>
+                <FormControl variant="outlined" className="form-emp-cv">
+                  <InputLabel>Chức Vụ</InputLabel>
+                  <Select
+                    name="maChucVu"
+                    value={data.maChucVu}
+                    onChange={handleChange}
+                    label="Chức vụ"
+                  >
+                    <MenuItem value={null}>none</MenuItem>
+                    <MenuItem value={1}>Nhân Viên</MenuItem>
+                    <MenuItem value={2}>Nhân Viên Kho</MenuItem>
+                    <MenuItem value={3}>Quản Lý</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            )}
           </Grid.Column>
           <Grid.Row style={{ display: "flex", justifyContent: "center" }}>
             <Button color="google plus" onClick={handleSubmit}>

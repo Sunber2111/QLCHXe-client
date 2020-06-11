@@ -120,8 +120,8 @@ const OrderPage = () => {
   };
 
   return (
-    <Grid>
-      <GridRow>
+    <Grid className='mx-auto'>
+      <GridRow className='mx-auto'>
         <GridColumn computer={11} mobile={16}>
           <CarTableOrders cars={[...dsXe]} onAddCar={handleAddCar} />
         </GridColumn>
@@ -139,12 +139,12 @@ const OrderPage = () => {
           </Paper>
         </GridColumn>
       </GridRow>
-      <GridRow>
+      <GridRow className='mx-auto'>
         <GridColumn computer={11} mobile={16}>
           <OrdersDetail cars={[...ctHdx]} handleDelete={handleDelete} />
         </GridColumn>
         <GridColumn computer={5} mobile={16}>
-          <div className="text-center mb-2">
+          <div className="text-center mb-2 mt-3">
             <Label color="blue" basic>
               <p style={{ fontSize: "20px" }}>Hóa Đơn Xuất</p>
             </Label>

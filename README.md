@@ -40,4 +40,10 @@ public string Cmnd { get; set; }
 public string Sdt { get; set; }
 public DateTime NgaySinh { get; set; }
 
+[30/5/2020]
+- login / logout
+- update account
+- initial data
+
+
 

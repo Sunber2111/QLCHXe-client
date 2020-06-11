@@ -2,6 +2,7 @@ import * as store from "../constants/store";
 import agent from "../../app/api/agent";
 import { success, error as err } from "../../app/notify";
 import { closeModal } from "./modal";
+import { closeDialog } from "./dialog";
 
 export const getAll = () => async (dispatch) => {
   const data = await agent.Store.getAll();
@@ -29,7 +30,7 @@ export const submit = (data) => async (dispatch) => {
       });
       success("Sửa Thành Công");
     }
-    dispatch(closeModal());
+    dispatch(closeDialog());
   } catch (error) {
     err("Thất Bại");
     console.log(error);

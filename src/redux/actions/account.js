@@ -15,7 +15,7 @@ export const login = (acc) => async (dispatch) => {
 
     dispatch(closeDialog());
 
-    history.push("/xe");
+    history.push("/car");
   } catch (error) {
     console.log(error);
 
@@ -129,5 +129,22 @@ export const regisAccount = (acc) => async (dispatch) => {
     dispatch(closeDialog());
   } catch (error) {
     err(error);
+  }
+};
+
+export const resetPassword = (email) => async (dispatch) => {
+  try {
+    const data = await agent.Account.resetPassword(email);
+    console.log(data);
+    
+    dispatch({
+      type: account.ACCOUNT_ERRORS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: account.ACCOUNT_ERRORS,
+      payload: error,
+    });
   }
 };

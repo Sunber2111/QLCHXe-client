@@ -36,7 +36,7 @@ const FastNews = ({ data }) => {
     return arr;
   };
 
-  return <GridRow className="pt-0">{createData()}</GridRow>;
+  return <GridRow className="pt-0 mx-auto">{createData()}</GridRow>;
 };
 
 export default React.memo(FastNews);
